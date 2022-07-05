@@ -12,4 +12,5 @@ class Gallery extends Model
     public function getImageLinkAttribute($value){
         return asset('upload/' . $this->filename);
     }
+    
 }

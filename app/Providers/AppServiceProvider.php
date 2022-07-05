@@ -15,8 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
         Schema::defaultStringLength(191);
+        $this->app->bind('path.public', function () {
+            return realpath(base_path() . '/../public_html');
+        });
     }
 
     /**
@@ -30,4 +33,5 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
     }
+
 }
