@@ -17,9 +17,6 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Schema::defaultStringLength(191);
-        $this->app->bind('path.public', function () {
-            return realpath(base_path() . '/../public_html');
-        });
     }
 
     /**
@@ -29,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(env('APP_ENV')!== 'local'){
-            URL::forceScheme('https');
-        }
+        // if(env('APP_ENV')!== 'local'){
+        //     URL::forceScheme('https');
+        // }
     }
 
 }
