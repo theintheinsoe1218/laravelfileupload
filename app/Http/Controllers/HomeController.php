@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
-
+use JD\Cloudder\Facades\Cloudder;
 
 class HomeController extends Controller
 {
@@ -39,15 +39,48 @@ class HomeController extends Controller
 
         if($request->hasFile('image')){
             foreach($request->file('image') as $image){
-                $fileName = time() . '_' . $image->getClientOriginalName();
+                // $fileName = time() . '_' . $image->getClientOriginalName();
 
                 // $request->file('image')->move(public_path('image'),$fileName);
 
-                $image->storeAs('upload', $fileName);
+                // $image->storeAs('upload', $fileName);
+
+                // $gallery=new Gallery;
+                // $gallery->filename=$fileName;
+                // $gallery->save();
+
+                // $name = time().'_'.$image->getClientOriginalName();
+
+
+                // $image_name = $image->getRealPath();
+                // // dd($image_name);
+                // Cloudder::upload($image_name, null);
+                // list($width, $height) = getimagesize($image_name);
+                // $image_url = Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height" => $height]);
+                // $image->storeAs('upload', $name);
+
+                // $this->saveImages($request, $image_url);
+
+                $uploadedFileUrl = cloudinary()->upload($image->getRealPath(),[
+                    'folder'=>'laravelfileupload'
+                ])->getSecurePath();
+                // dd($uploadedFileUrl);
+                $image->storeAs('upload/', $uploadedFileUrl);
+
+
 
                 $gallery=new Gallery;
-                $gallery->filename=$fileName;
+                $gallery->filename= $uploadedFileUrl;
                 $gallery->save();
+
+
+
+
+
+
+
+
+
 
             }
         }
@@ -68,7 +101,7 @@ class HomeController extends Controller
     public function download($id)
     {
         $gallery = Gallery::findOrFail($id);
-        return Storage::download('upload/' . $gallery->filename);
+        return Storage::download('upload/'.$gallery->filename);
     }
 
 
