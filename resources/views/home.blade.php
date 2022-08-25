@@ -18,10 +18,13 @@
             @endif
             <form method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="input-group">
-                    <input type="file" name="image[]" multiple class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                    <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
-                </div>
+                @auth
+                    <div class="input-group">
+                        <input type="file" name="image[]" multiple class="form-control" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
+                    </div>
+                @endauth
                 <div class="row mt-5">
                     @foreach ($galleries as $gallery)
                         <div class="col-md-4 mb-4">
@@ -33,6 +36,7 @@
                                     <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
                                     <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
                                     <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
+
                                 </div>
                             </div>
                         </div>
@@ -44,3 +48,4 @@
     </div>
 </div>
 @endsection
+

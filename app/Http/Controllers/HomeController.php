@@ -24,6 +24,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','store', 'download']);
+    }
+
     public function index()
     {
         $galleries=Gallery::all();
@@ -66,22 +73,9 @@ class HomeController extends Controller
                 ])->getSecurePath();
                 // dd($uploadedFileUrl);
                 $image->storeAs('upload/', $uploadedFileUrl);
-
-
-
                 $gallery=new Gallery;
                 $gallery->filename= $uploadedFileUrl;
                 $gallery->save();
-
-
-
-
-
-
-
-
-
-
             }
         }
 
