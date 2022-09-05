@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('gallery-delete',function($user,$gallery){
+            return $user->id==$gallery->user_id;
+        });
     }
 }

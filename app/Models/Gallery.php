@@ -15,4 +15,8 @@ class Gallery extends Model
         return asset('upload/' . $this->filename);
     }
 
+    public function user(){
+        return $this->belongsTo("App\Models\User");
+    }
+
 }
