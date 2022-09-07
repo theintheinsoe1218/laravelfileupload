@@ -27,19 +27,30 @@
                 @endauth
                 <div class="row mt-5">
                     @foreach ($galleries as $gallery)
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180"/>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
-                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
-                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
+                        {{-- @if ($gallery->user_id == auth()->user()->id) --}}
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180" />
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
+                                        <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
+                                        <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
+                                        <br />
+                                        {{-- <p>{{ auth()->user()->name }}</p> --}}
+                                        {{-- <div class="form-check float-end mt-3">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                public
+                                            </label>
+                                        </div> --}}
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {{-- @endif --}}
+
                     @endforeach
                 </div>
 
@@ -48,4 +59,6 @@
     </div>
 </div>
 @endsection
+
+{{-- https://www.positronx.io/laravel-upload-images-with-spatie-media-library-tutorial/ --}}
 

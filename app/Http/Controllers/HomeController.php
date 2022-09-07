@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
 use JD\Cloudder\Facades\Cloudder;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
@@ -33,8 +34,10 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $galleries=Gallery::all();
         return view('home',compact('galleries'));
+
     }
 
     public function store(Request $request)
@@ -75,21 +78,26 @@ class HomeController extends Controller
                 // $image->storeAs('upload/', $uploadedFileUrl);
                 $gallery=new Gallery;
                 $gallery->filename= $uploadedFileUrl;
+                $gallery->user_id=auth()->user()->id;
                 $gallery->save();
             }
         }
 
-
-        return back()->with('status','Images were uploaded');
+        return back()->with('status','Image uploaded Successfully');
 
     }
 
     public function destory($id)
     {
         $gallery = Gallery::findOrFail($id);
-        Storage::delete('upload/' . $gallery->filename);
-        $gallery->delete();
-        return back()->with('status','An image was deleted');
+        if(Gate::allows('gallery-delete',$gallery)){
+            Storage::delete('upload/' . $gallery->filename);
+            $gallery->delete();
+            return back()->with('status', 'An image was deleted');
+        }else{
+            return back()->with('status', 'Unauthorize');
+
+        }
     }
 
     public function download($id)
@@ -97,6 +105,4 @@ class HomeController extends Controller
         $gallery = Gallery::findOrFail($id);
         return Storage::download('upload/'.$gallery->filename);
     }
-
-
 }
