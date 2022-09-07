@@ -69,10 +69,10 @@ class HomeController extends Controller
                 // $this->saveImages($request, $image_url);
 
                 $uploadedFileUrl = cloudinary()->upload($image->getRealPath(),[
-                    'folder'=>'laravelfileupload'
+                    'folder'=>'fileupload'
                 ])->getSecurePath();
                 // dd($uploadedFileUrl);
-                $image->storeAs('upload/', $uploadedFileUrl);
+                // $image->storeAs('upload/', $uploadedFileUrl);
                 $gallery=new Gallery;
                 $gallery->filename= $uploadedFileUrl;
                 $gallery->save();
