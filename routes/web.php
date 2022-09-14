@@ -20,7 +20,7 @@ use App\Http\Controllers\HomeController;
 
 Auth::routes();
 
-Route::get( '/', [HomeController::class, 'index'])->name('home.index');
+Route::get( '/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
 Route::post('/',[HomeController::class, 'store'])->name('home.store');
 Route::get('/{id}/delete',[HomeController::class,'destory'])->name('home.destory');
 Route::get('/{id}/download',[HomeController::class,'download'])->name('home.download');

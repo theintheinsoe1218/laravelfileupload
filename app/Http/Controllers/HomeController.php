@@ -34,14 +34,15 @@ class HomeController extends Controller
 
     public function index()
     {
-
         $galleries=Gallery::all();
+        // $galleries=auth()->user()->galleries;
         return view('home',compact('galleries'));
 
     }
 
     public function store(Request $request)
     {
+        // dd($request->public);
         $request->validate([
             'image'=>'required',
             'image.*'=>'image'
@@ -78,6 +79,7 @@ class HomeController extends Controller
                 // $image->storeAs('upload/', $uploadedFileUrl);
                 $gallery=new Gallery;
                 $gallery->filename= $uploadedFileUrl;
+                $gallery->isActive=$request->boolean('public');
                 $gallery->user_id=auth()->user()->id;
                 $gallery->save();
             }
