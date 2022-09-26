@@ -33,28 +33,56 @@
                         
                     </div>
                 @endauth
-                <div class="row mt-5">
-                    @foreach ($galleries as $gallery)
-                
-                    @if($gallery->user_id==auth()->user()->id)
-                    
-                    <div class="col-md-4 mt-3 mb-4">
-                        <div class="card">
-                            <div class="card-body p-0">
-                                <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180" />
-                            </div>
-                            <div class="card-footer">
-                                <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
-                                <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
-                                <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
-                            </div>
-                            
+                {{-- {{ auth()->user()->galleries }} --}}
 
+                <div class="row mt-5">
+                    @foreach($galleries as $gallery)
+                        
+                        @if(auth()->user()->id!=$gallery->user_id && $gallery->isActive==1)
+                        <div class="col-md-4 mt-3 mb-4">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180" />
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
+                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-sm btn-success">Download</a>
+                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
+                        {{ $gallery->id }}
+
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    @endif
+                            @continue 
+                        @elseif(auth()->user()->id==$gallery->user_id)
+                        <div class="col-md-4 mt-3 mb-4">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180" />
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
+                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-sm btn-success">Download</a>
+                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
+                                    
+                                    {{ $gallery->id }}
+
+                                </div>
+                            </div>
+                        </div>  
+                        {{-- @elseif($gallery->isActive==0)
+                            
+                            <div class="col-md-4 mt-3 mb-4">
+                                private
+                            </div> --}}
+                        
+                        @endif
 
                     @endforeach
+                    
+                    
+                        
+
                     
                 </div>
 
@@ -67,4 +95,3 @@
 <!-- {{-- https://www.positronx.io/laravel-upload-images-with-spatie-media-library-tutorial/ --}} -->
 <!-- https://www.itsolutionstuff.com/post/laravel-8-user-roles-and-permissions-tutorialexample.html#at_pco=smlwn-1.0&at_si=6319c066244a6cf4&at_ab=per-2&at_pos=0&at_tot=1 -->
 {{-- https://www.honeybadger.io/blog/user-roles-permissions-in-laravel/ --}}
-
