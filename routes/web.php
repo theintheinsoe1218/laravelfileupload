@@ -24,7 +24,6 @@ Route::get( '/', [HomeController::class, 'index'])->middleware('auth')->name('ho
 Route::post('/',[HomeController::class, 'store'])->name('home.store');
 Route::get('/{id}/delete',[HomeController::class,'destory'])->name('home.destory');
 Route::get('/{id}/download',[HomeController::class,'download'])->name('home.download');
-Route::get('/detail',[HomeController::class,'detail'])->name('home.detail');
 Route::get('/lang/', function () {
     return view('lang');
 });

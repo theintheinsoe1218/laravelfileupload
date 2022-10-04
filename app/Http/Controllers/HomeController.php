@@ -89,13 +89,6 @@ class HomeController extends Controller
 
     }
 
-    public function detail(){
-        // $galleries=auth()->user()->galleries;
-        $galleriesActive=Gallery::where('user_id','!=',auth()->user()->id)->orWhere('isActive','==','1')->get();
-
-
-        return view('detail',compact('galleriesActive'));
-    }
 
     public function store(Request $request)
     {
@@ -110,11 +103,11 @@ class HomeController extends Controller
 
         if($request->hasFile('image')){
             foreach($request->file('image') as $image){
-                // $fileName = time() . '_' . $image->getClientOriginalName();
+                $fileName = time() . '_' . $image->getClientOriginalName();
 
-                // $request->file('image')->move(public_path('image'),$fileName);
+                // $image->move(public_path('image'),$fileName);
 
-                // $image->storeAs('upload', $fileName);
+                $image->storeAs('upload', $fileName);
 
                 // $gallery=new Gallery;
                 // $gallery->filename=$fileName;
@@ -123,41 +116,30 @@ class HomeController extends Controller
                 // $name = time().'_'.$image->getClientOriginalName();
 
 
-                // $image_name = $image->getRealPath();
-                // // dd($image_name);
-                // Cloudder::upload($image_name, null);
-                // list($width, $height) = getimagesize($image_name);
-                // $image_url = Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height" => $height]);
-                // $image->storeAs('upload', $name);
+                
 
-                // $this->saveImages($request, $image_url);
 
-                $uploadedFileUrl = cloudinary()->upload($image->getRealPath(),[
-                    'folder'=>'fileupload'
-                ])->getSecurePath();
-                // dd($uploadedFileUrl);
-                // $image->storeAs('upload/', $uploadedFileUrl);
+                // $uploadedFileUrl = cloudinary()->upload($image->getRealPath(),[
+                //     'folder'=>'laravalfileupload'
+                // ])->getSecurePath();
+                // // dd($uploadedFileUrl);
+                // $image->storeAs('upload', $uploadedFileUrl);
+
+                // $image->move(public_path('upload'),$uploadedFileUrl);
+
 
                 
                 $gallery=new Gallery;
-                $gallery->filename= $uploadedFileUrl;
+                $gallery->filename= $fileName;
                 $gallery->isActive=$request->boolean('public');
                 $gallery->user_id=auth()->user()->id;
-                $gallery->save();
-                // return response()->json([
-                //     'status'=>'Image Uploaded Successfully',
-                //     'gallery'=>$gallery
-                // ]);
-                
-            }
+                $gallery->save(); 
+                // $image->storeAs('upload/', $uploadedFileUrl);
 
-            
+            }  
         }
 
         return back()->with('status','Image uploaded Successfully');
-        // return response()->json(['success'=>'Form Submitted successfully.']);
-
-
     }
 
     
@@ -181,5 +163,4 @@ class HomeController extends Controller
         return Storage::download('upload/'.$gallery->filename);
     }
 
-    
 }

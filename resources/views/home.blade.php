@@ -33,7 +33,7 @@
                         
                     </div>
                 @endauth
-                {{-- {{ auth()->user()->galleries }} --}}
+                
 
                 <div class="row mt-5">
                     @foreach($galleries as $gallery)
@@ -42,14 +42,13 @@
                         <div class="col-md-4 mt-3 mb-4">
                             <div class="card">
                                 <div class="card-body p-0">
-                                    <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180" />
+                                    <img src="{{ asset('upload/'. $gallery->filename) }}" alt="image" width="100%" height="180" />
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
-                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-sm btn-success">Download</a>
+                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info">View</a>
+                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
                                     <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
                         {{ $gallery->id }}
-
                                 </div>
                             </div>
                         </div>
@@ -58,32 +57,22 @@
                         <div class="col-md-4 mt-3 mb-4">
                             <div class="card">
                                 <div class="card-body p-0">
-                                    <img src="{{ $gallery->filename }}" alt="image" width="100%" height="180" />
+                                    <img src="{{ asset('upload/'. $gallery->filename) }}" alt="image" width="100%" height="180" />
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ $gallery->filename }}" target="_blank" class="btn btn-info">View</a>
-                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-sm btn-success">Download</a>
+                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info">View</a>
+                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
                                     <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
                                     
-                                    {{ $gallery->id }}
+                                {{ $gallery->id }}
 
                                 </div>
                             </div>
                         </div>  
-                        {{-- @elseif($gallery->isActive==0)
-                            
-                            <div class="col-md-4 mt-3 mb-4">
-                                private
-                            </div> --}}
                         
                         @endif
 
-                    @endforeach
-                    
-                    
-                        
-
-                    
+                    @endforeach   
                 </div>
 
             </form>
