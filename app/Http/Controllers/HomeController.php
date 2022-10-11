@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','store', 'download']);
+        $this->middleware('auth')->except(['store', 'download']);
     }
 
     public function index()
@@ -41,62 +41,19 @@ class HomeController extends Controller
         // $galleries=auth()->user()->galleries;
         // print_r($galleryarray[0]->isActive);
         $galleries=Gallery::all();
-        // $galleryarray=json_decode($galleries);
-        // $arrlength=count($galleries);
-        // echo $arrlength;
-
-        // foreach($galleries as $gallery){
-        //     if(auth()->user() && $gallery->isActive==1){
-        //         $galleryreal=$gallery;
-                
-        //     }else{
-        //         $galleryreal=$gallery->isActive=='private';
-        //     }
-        // }
-
-
-
-
-            // for($i=0;$i<$arrlength;$i++){
-            //     $user=auth()->user();
-            //     // echo $user;
-            //     $isPublic = $galleries[$i]->isActive==1;
-            //     // echo $isPublic;
-            //     if($isPublic && $user){
-            //         // print_r($galleries[$i]);
-            //         $galleriesreal=$galleries[$i];
-            //         echo($galleriesreal);
-                    
-            //         // print_r($galleriesreal);
-            //         // return view('home',compact('galleriesreal'));
-            //     }else{
-            //         // print_r($galleries[$i]->isActive='private');
-            //         $galleriesreal=$galleries[$i]->isActive='private';
-            //         // return view('home',compact('galleriesreal'));
-            //         echo($galleriesreal);
-            //         // echo'hi';
-            //     }
-
-            //         // return view('home',compact('galleriesreal'));
-
-            // }
-        
-        // echo $isOwner;
-
         return view('home',compact('galleries'));
         
-        
-
     }
 
 
     public function store(Request $request)
     {
         
-        // dd($request->public);
+        // dd($request->all());
         $request->validate([
             'image'=>'required',
-            'image.*'=>'image'
+            'image.*'=>'image',
+            'desc'=>'required',
         ]);
 
         
@@ -131,6 +88,7 @@ class HomeController extends Controller
                 
                 $gallery=new Gallery;
                 $gallery->filename= $fileName;
+                $gallery->description=$request->desc;
                 $gallery->isActive=$request->boolean('public');
                 $gallery->user_id=auth()->user()->id;
                 $gallery->save(); 

@@ -23,49 +23,59 @@
                         <input type="file" name="image[]" multiple class="form-control" id="inputGroupFile04"
                             aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         
-                        <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
                     </div>
-                    <div class="form-check float-end mt-3">
+                    <div class="form-floating mt-2">
+                        <textarea class="form-control" placeholder="Description" id="floatingTextarea" name="desc"></textarea>
+                        <label for="floatingTextarea">Description</label>
+                    </div>
+                    
+                    <div class="form-check mt-3">
                         <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="public">
                         <label class="form-check-label" for="flexCheckDefault">
                             public
                         </label> 
                         
                     </div>
+                    <button class="btn btn-primary mt-3" type="submit" id="inputGroupFileAddon04">Upload</button>
+
                 @endauth
                 
-
+                
                 <div class="row mt-5">
                     @foreach($galleries as $gallery)
                         
                         @if(auth()->user()->id!=$gallery->user_id && $gallery->isActive==1)
                         <div class="col-md-4 mt-3 mb-4">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <img src="{{ asset('upload/'. $gallery->filename) }}" alt="image" width="100%" height="180" />
+                            <div class="card anothercard">
+                                <img src="{{ asset('upload/'. $gallery->filename) }}" class="card-img-top" alt="image" width="100%" height="180" />
+
+                                <div class="card-body">
+                                    <h4 class="fw-bold">Description:</h4>
+                                    <p class="card-title">{{ $gallery->description }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info">View</a>
-                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
-                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
-                        {{ $gallery->id }}
+                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success"><i class="fa-solid fa-circle-down"></i></a>
+                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end"><i class="fa-solid fa-trash"></i></a>
+                                    
                                 </div>
                             </div>
                         </div>
-                            @continue 
+                    
                         @elseif(auth()->user()->id==$gallery->user_id)
                         <div class="col-md-4 mt-3 mb-4">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <img src="{{ asset('upload/'. $gallery->filename) }}" alt="image" width="100%" height="180" />
+                            <div class="card anothercard">
+                                <img src="{{ asset('upload/'. $gallery->filename) }}" class="card-img-top" alt="image" width="100%" height="180" />
+
+                                <div class="card-body">
+                                    <h4 class="fw-bold">Description:</h4>
+                                    <p class="card-title">{{ $gallery->description }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info">View</a>
-                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success">Download</a>
-                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end">Delete</a>
+                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success"><i class="fa-solid fa-circle-down"></i></a>
+                                    <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end"><i class="fa-solid fa-trash"></i></a>
                                     
-                                {{ $gallery->id }}
-
                                 </div>
                             </div>
                         </div>  
@@ -74,7 +84,7 @@
 
                     @endforeach   
                 </div>
-
+                
             </form>
         </div>
     </div>

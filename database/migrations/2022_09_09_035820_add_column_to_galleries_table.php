@@ -14,9 +14,12 @@ class AddColumnToGalleriesTable extends Migration
     public function up()
     {
         Schema::table('galleries', function (Blueprint $table) {
-            $table->after('filename',function($table){
-                $table->boolean('isActive');
-            });
+            // $table->after('filename',function($table){
+            //     $table->boolean('isActive');
+            // });
+            // $table->before('isActive',function($table){
+            //     $table->string('description');
+            // });
         });
     }
 
@@ -28,7 +31,7 @@ class AddColumnToGalleriesTable extends Migration
     public function down()
     {
         Schema::table('galleries', function (Blueprint $table) {
-            //
+            
         });
     }
 }

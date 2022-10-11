@@ -41,6 +41,18 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'cloud-backup' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
+            'accessToken'=>env('GOOGLE_DRIVE_ACCESS_TOKEN')
+        ],
+        'local-backup' => [
+            'driver' => 'local',
+            'root' => storage_path('app/Fileupload'),
+        ],
 
         's3' => [
             'driver' => 's3',
