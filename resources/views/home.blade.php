@@ -69,7 +69,7 @@
 
                                 <div class="card-body">
                                     <h4 class="fw-bold">Description:</h4>
-                                    <p class="card-title">{{ $gallery->description }}</p>
+                                    <p class="card-title">{{ \Illuminate\Support\Str::limit($gallery->description, 150, ' ...') }}</p>
                                 </div>
                                 <div class="card-footer">
                                     <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
