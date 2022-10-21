@@ -34,5 +34,5 @@ Route::get('/lang/{local}', function ($local) {
     return view('lang');
 });
 
-Route::view('/review','review');
-Route::post('/review-create',[ReviewController::class,'store'])->name('review.store');
+Route::view('/review','review')->middleware('auth');
+Route::post('/review-create',[ReviewController::class,'store'])->middleware('auth')->name('review.store');

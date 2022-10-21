@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Mail;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function store(Request $request){
         // dd($request->all());
         $reviewData=[
