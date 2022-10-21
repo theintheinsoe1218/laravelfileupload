@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,6 @@ Route::get('/lang/{local}', function ($local) {
     App()->setlocale($local);
     return view('lang');
 });
+
+Route::view('/review','review');
+Route::post('/review-create',[ReviewController::class,'store'])->name('review.store');
