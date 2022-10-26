@@ -38,6 +38,10 @@ Route::get('/lang/{local}', function ($local) {
 Route::view('/review','review')->middleware('auth');
 Route::post('/review-create',[ReviewController::class,'store'])->middleware('auth')->name('review.store');
 
-Route::get('/admin',[AdminController::class,'index']);
-Route::get('/admin/user-ssd',[AdminController::class,'ssd']);
-Route::get('/admin/delete/{id}',[AdminController::class,'destroy'])->name('admin.user-delete');
+
+Route::middleware(['auth','isAdmin'])->group(function(){
+
+    Route::get('/admin',[AdminController::class,'index']);
+    Route::get('/admin/user-ssd',[AdminController::class,'ssd']);
+    Route::get('/admin/delete/{id}',[AdminController::class,'destroy'])->name('admin.user-delete');
+});

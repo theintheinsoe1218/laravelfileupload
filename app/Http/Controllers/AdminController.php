@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,10 +23,10 @@ class AdminController extends Controller
             return '<a class="btn btn-sm btn-danger delete" data-id="'.$user->id.'">Delete</a>';
         })
         ->editColumn('created_at',function($user){
-            return $user->created_at->format('Y/m/d');
+            return Carbon::parse($user->created_at)->format('Y/m/d H:i:s');
         })
         ->editColumn('updated_at',function($user){
-            return $user->updated_at->format('Y/m/d');
+            return Carbon::parse($user->updated_at)->format('Y/m/d H:i:s');
         })
         ->make(true);
 
