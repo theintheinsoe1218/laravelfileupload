@@ -30,6 +30,9 @@
 
     {{-- Fontawesome cdn --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{-- datatable responsive css --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 </head>
 
 <body>
@@ -46,7 +49,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        @auth
+                        {{-- @auth
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/') }}">
                                     Home
@@ -57,7 +60,7 @@
                                     Review
                                 </a>
                             </li>
-                        @endauth
+                        @endauth --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -112,6 +115,9 @@
 
     {{-- datatable bootstrap js --}}
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+    {{-- datatabe responsive js --}}
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     @stack('scripts')
 </body>
 </html>

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">All Users</div>
                     <div class="card-body">
-                        <table class="table table-bordered usertable">
+                        <table class="table table-bordered usertable" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -33,6 +33,7 @@
             var table=$('.usertable').DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: '/admin/user-ssd',
                 columns: [
 
