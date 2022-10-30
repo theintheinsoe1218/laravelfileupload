@@ -5,7 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8 mx-auto">
                 <div class="card">
-                    <div class="card-header">All Users</div>
+                    <div class="card-header d-flex justify-content-between align-content-center">
+                        <h2>All Users</h2>
+                        <a href="{{ route('excel.export') }}" class="btn btn-secondary">Export</a>
+
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered usertable" style="width:100%">
                             <thead>
@@ -21,6 +25,8 @@
 
                             </tbody>
                         </table>
+                        {{-- {!! $dataTable->table() !!} --}}
+
                     </div>
                 </div>
             </div>
@@ -41,8 +47,10 @@
                     { data: 'email', name: 'email' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'updated_at', name: 'updated_at' },
-                    { data: 'action', name: 'action' },
-                ]   
+                    { data: 'action', name: 'action', orderable:false, searchable:false},
+                ],
+                
+                  
             });
 
             $(document).on('click','.delete',function(){
@@ -62,4 +70,9 @@
 
        
     </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="/vendor/datatables/buttons.server-side.js"></script>
+    {{-- {!! $dataTable->scripts() !!} --}}
+
 @endpush

@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ReviewController;
 
 /*
@@ -45,3 +47,5 @@ Route::middleware(['auth','isAdmin'])->group(function(){
     Route::get('/admin/user-ssd',[AdminController::class,'ssd']);
     Route::get('/admin/delete/{id}',[AdminController::class,'destroy'])->name('admin.user-delete');
 });
+
+Route::get('/excel-export',[ExcelController::class,'excelExport'])->name('excel.export');

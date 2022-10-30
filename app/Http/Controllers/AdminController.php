@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\DataTables\UsersDataTable;
+use App\Models\Gallery;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
@@ -12,15 +14,21 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.home');
+        // return $dataTable->render('admin.home');
+
+
     }
 
     public function ssd()
     {
         $users=User::query();
 
+
         return DataTables::of($users)
         ->addColumn('action',function($user){
-            return '<a class="btn btn-sm btn-danger delete" data-id="'.$user->id.'">Delete</a>';
+            $btn='<a class="btn btn-sm btn-secondary edit" data-id="'.$user->id.'">Edit</a>';
+            $btn .= ' <a class="btn btn-sm btn-danger delete" data-id="'.$user->id.'">Delete</a>';
+            return $btn;
         })
         ->editColumn('created_at',function($user){
             return Carbon::parse($user->created_at)->format('Y/m/d H:i:s');

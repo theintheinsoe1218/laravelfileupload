@@ -44,7 +44,7 @@ class User extends Authenticatable
     ];
 
     public function Galleries(){
-        return $this->hasMany(Gallery::class);
+        return $this->hasMany(Gallery::class,'user_id','id');
     }
 
     

@@ -33,6 +33,10 @@
 
     {{-- datatable responsive css --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
+
 </head>
 
 <body>
@@ -118,6 +122,9 @@
 
     {{-- datatabe responsive js --}}
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    
+    <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+
     @stack('scripts')
 </body>
 </html>
