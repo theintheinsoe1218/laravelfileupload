@@ -36,10 +36,6 @@ class HomeController extends Controller
     public function index()
     {
         
-        // $galleries=Gallery::where('user_id','!=',auth()->user()->id)->get();
-        // dd($galleries);
-        // $galleries=auth()->user()->galleries;
-        // print_r($galleryarray[0]->isActive);
         $galleries=Gallery::all();
         return view('home',compact('galleries'));
         

@@ -54,7 +54,7 @@
                                     <p class="card-title">{{ $gallery->description }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ asset('upload/'. $gallery->filename) }}" target="_blank" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ asset('image/'. $gallery->filename) }}" target="_blank" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
                                     <a href="{{ route('home.download',$gallery->id) }}" class="btn btn-success"><i class="fa-solid fa-circle-down"></i></a>
                                     <a href="{{ route('home.destory',$gallery->id)}}" class="btn btn-danger float-end"><i class="fa-solid fa-trash"></i></a>
                                     

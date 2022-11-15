@@ -26,8 +26,7 @@ class AdminController extends Controller
 
         return DataTables::of($users)
         ->addColumn('action',function($user){
-            $btn='<a class="btn btn-sm btn-secondary edit" data-id="'.$user->id.'">Edit</a>';
-            $btn .= ' <a class="btn btn-sm btn-danger delete" data-id="'.$user->id.'">Delete</a>';
+            $btn = ' <a class="btn btn-sm btn-danger delete" data-id="'.$user->id.'">Delete</a>';
             return $btn;
         })
         ->editColumn('created_at',function($user){
